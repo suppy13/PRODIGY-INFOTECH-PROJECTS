@@ -1,0 +1,56 @@
+# SUPRATIM BOSE
+# CAESAR CIPHER FOR ENCRYPTION AND DECRYPTION - TASK 1
+# PRODIGY_INFOTECH - CYBER SECURTIY INTERN
+
+import string
+letters = string.ascii_uppercase + string.ascii_lowercase + string.punctuation
+num_letters = len(letters)
+
+# Creating function for Encryption 
+def encrypt(plaintext, key):
+    ciphertext = ''
+    for letter in plaintext:
+        if letter in letters:
+            index = letters.find(letter)
+            new_index = (index + key) % num_letters
+            ciphertext += letters[new_index]
+ # Preserve non-alphabetic characters
+        else:
+            ciphertext += letter  
+    return ciphertext
+
+# Creating function for Decryption 
+def decrypt(ciphertext, key):
+    plaintext = ''
+    for letter in ciphertext:
+        if letter in letters:
+            index = letters.find(letter)
+            new_index = (index - key) % num_letters
+            plaintext += letters[new_index]
+# Preserve non-alphabetic characters
+        else:
+            plaintext += letter 
+    return plaintext
+
+print("Do you want to encrypt or decrypt?")
+user_input = input("e/d: ").lower()
+print()
+
+# For Encrytion
+if user_input == 'e':
+    print("Encryption Mode Selected")
+    key = int(input("Enter the key (1 through 26): "))
+    text = input("Enter the text to encrypt: ")
+    ciphertext = encrypt(text, key)
+    print(f"CIPHERTEXT: {ciphertext}")
+
+#  For Decrytion
+elif user_input == 'd':
+    print("Decryption Mode Selected")
+    key = int(input("Enter the key (1 through 26): "))
+    text = input("Enter the text to decrypt: ")
+    plaintext = decrypt(text, key)
+    print(f"PLAINTEXT: {plaintext}")
+    
+else:
+    print("Invalid input. Please enter 'e' for encryption or 'd' for decryption.")
